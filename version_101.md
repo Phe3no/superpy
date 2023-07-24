@@ -11,8 +11,8 @@
 The last comment was made on the incorrect functioning of inventory, revenue and profit without arguments.
 I did nothing change there, because I am convinced that it worked correctly.
 
-- The inventory report shows stock from the --set-date and before, as long as there are no expired products
-- the revenue en profit reports show the revenue or profit on the --set-date
+- The inventory report shows stock from the --set-date and before, as long as the products are not expired
+- the revenue and profit reports show the revenue or profit on the --set-date
 
 If not, I'd like to hear about it
 
