@@ -63,23 +63,22 @@ python main.py report inventory
 **** Let's create a sell order:
 
 use 'sell' for sell order folowed by
--i product-id      -->> you could have seen it in the report
--q quantity"
+-n product-name      
+-q quantity
 -p price
 
 XXXXamples
-python main.py sell -i 10 -q 2 -p 0.99
-python main.py sell -i 1 -q 1 -p 0.98
-python main.py sell -i 6 -q 1 -p 3.24
-
+python main.py sell -i hamburger -q 2 -p 0.99
+python main.py sell -i orange -q 1 -p 0.98
+python main.py sell -i melon -q 1 -p 3.24
 
 
 *** Let's check the inventory again
 
 XXXXamples
 python main.py report
-python main.py report inventory                 -->> defaults today's date, all products in stock AT this date
-python main.py report inventory -y              -->> all products in stock AT this date
+python main.py report inventory                 -->> defaults today's date, all products in stock AT --set-date
+python main.py report inventory -y              -->> all products in stock yesterday
 python main.py report inventory -d 2023         -->> all products in stock in this year
 python main.py report inventory -d 2023-07      -->> all products in stock in this month
 python main.py report inventory -d 2023-07-22   -->> all products in stock on this day
@@ -89,22 +88,22 @@ python main.py report inventory -d 2023-07-22   -->> all products in stock on th
 *** Let's check the revenue
 
 XXXXamples
-python main.py report revenue                  -->> defaults today's date
-python main.py report revenue -y
-python main.py report revenue -d 2023
-python main.py report revenue -d 2023-07
-python main.py report revenue -d 2023-07-22
+python main.py report revenue                   -->> defaults --set-date
+python main.py report revenue -y                -->> revenue yesterday
+python main.py report revenue -d 2023           -->> revenue 2023
+python main.py report revenue -d 2023-07        -->> revenue July 2023
+python main.py report revenue -d 2023-07-22     -->> revenue July, 22 2023 
 
 
 
 *** Let's check the profit
 
 XXXXamples
-python main.py report profit                   -->> defaults today's date
-python main.py report profit -y
-python main.py report profit -d 2023
-python main.py report profit -d 2023-07
-python main.py report profit -d 2023-07-22
+python main.py report profit                    -->> defaults today's date
+python main.py report profit -y                 -->> profit yesterday
+python main.py report profit -d 2023            -->> profit 2023
+python main.py report profit -d 2023-07         -->> profit July 2023
+python main.py report profit -d 2023-07-22      -->> profit July, 22 2023
 
 
 
@@ -144,13 +143,32 @@ python main.py report
 python main.py report revenue        
 python main.py report profit  
 
+**** Let's set a date
+
+python main.py -s 2023-07-13
+python main.py --set-date 2023-07-13
+
+**** and check all 3 reports.....
+
+python main.py report inventory
+python main.py report inventory -y
+
+python main.py report revenue        
+python main.py report revenue -y        
+
+python main.py report profit  
+python main.py report profit -y
+
+
+
 As you can see the butter order is gone. 
 We did sell it though. But in was in the future.
 So if you'll wait long enough, it will be there.
 
-
 Know that you are also be able to go back in time.
 You know enough about superpy to try this out for yourself.
+
+
 
 
 Thanks for reading!

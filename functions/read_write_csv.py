@@ -1,5 +1,9 @@
 import csv
 from os import SEEK_END, SEEK_CUR
+from functions.read_write_txt import get_time
+from rich.console import Console
+
+console = Console()
 
 
 def get_last_order_id(file):
@@ -43,16 +47,35 @@ def append_order(file, new_order):
             return False
 
 
-def update_inventory(file, bought_id, quantity):
+# def update_inventory(file, bought_id, quantity):
+def update_inventory(file, product_name, quantity):
+    def check_for_product(file, product_name):
+        with open(file, "r") as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+            for line in csv_reader:
+                if line["product_name"] in product_name:
+                    return line["id"]
+            console.print(
+                f"\n----- [red]Unfortunatly we can't sell [blue]{product_name}[/]. If you want to now what you can buy, check the inventory![/] -----\n")
+            exit()
+
     data = []
     buy_price = ""
+    product_id = check_for_product(file, product_name)
+    print(product_id)
     with open(file, "r") as csv_file:
         csv_reader = csv.DictReader(csv_file)
         for line in csv_reader:
-            if line["id"] == str(bought_id):
+            if line["id"] == str(product_id):
                 # check stock
                 if (int(line["quantity"]) - quantity) < 0:
-                    print("ERROR: Not enough of this product in stock")
+                    console.print(
+                        "\n----- [red]Unfortunately there is not enough of this product in stock![/] -----\n")
+                    exit()
+                # check expiration date
+                if (line["expiration_date"]) < get_time().strftime("%Y-%m-%d"):
+                    console.print(
+                        "\n-----  [red]Unfortunately you are not allowed to buy this product, it has past it's expiration date![/] -----\n")
                     exit()
                 # enough stock, change quantity
                 line["quantity"] = int(line["quantity"]) - quantity
@@ -67,7 +90,7 @@ def update_inventory(file, bought_id, quantity):
         for line in data:
             csv_writer.writerow(line)
 
-    return buy_price
+    return {"price": buy_price, "id": product_id}
 
 
 def get_file_contents(file):

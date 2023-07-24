@@ -64,7 +64,8 @@ def inventory_report(given_date):
         console.print(
             "[text]===== Get rid of them! Hire a professional developer who can write the necessary module for this! =====[/]")
 
-    console.print("\n[title]==== Inventory Report ====[/]")
+    console.print(
+        f"\n===== [title]Inventory Report[/] ->> [bold blue]Today it's {get_time().strftime('%B, %d %Y')}[/]  =====")
     if len(res) > 0:
         spaces = [4, 30, 10, 20, 10, 20]
         prepare_reports(res, spaces)
@@ -81,7 +82,8 @@ def revenue_report(given_date):
         if given_date in item["sell_date"]:
             res.append(item)
 
-    console.print("\n[title]==== Revenue Report ====[/]")
+    console.print(
+        f"\n[title]===== Revenue Report[/] ->> [bold blue]Today it's {get_time().strftime('%B, %d %Y')}[/] =====")
     revenue = 0
     revenue_list = []
     if len(res) > 0:
@@ -110,7 +112,8 @@ def profit_report(given_date):
         if given_date in item["sell_date"] and item["sell_date"] <= today.strftime("%Y-%m-%d"):
             res.append(item)
 
-    console.print("\n[title]==== Profit Report ====[/]")
+    console.print(
+        f"\n[title]==== Profit Report [/] ->> [bold blue]Today it's {get_time().strftime('%B, %d %Y')}[/] =====")
     profit = 0
     profit_list = []
     if len(res) > 0:
@@ -129,4 +132,4 @@ def profit_report(given_date):
             f"[bold][title]Total profit {given_date}:[/][price] {round(profit, 2)}[/][/] :thumbs_up:\n")
     else:
         console.print(
-            "[action]In the period of time you specified, no products were sold![/]")
+            "[bold][alert]In the period of time you specified, no products were sold![/][/]")

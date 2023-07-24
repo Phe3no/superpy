@@ -24,6 +24,12 @@ def initialize_parser():
                         metavar=""
                         )
 
+    parser.add_argument("-s", "--set-date",
+                        type=str,
+                        help="manipulate the time, enter the date you want to travel to in this format: YYYY-MM-DD",
+                        metavar=""
+                        )
+
     parser.add_argument("-n", "--now",
                         action="store_const",
                         const=date.today(),
@@ -72,10 +78,10 @@ def initialize_parser():
         "sell", help="create a sell order... use 'sell -h' for help with a sell order")
 
     sell_order.add_argument(
-        "-i", "--product-id",
+        "-n", "--product-name",
         type=str,
         required=True,
-        help="required... specifie a product id... use 'report inventory' to find a product id",
+        help="required... specifie a product name...",
         metavar=""
     )
 

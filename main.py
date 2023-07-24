@@ -9,7 +9,7 @@ __human_name__ = "superpy"
 
 # Your code below this line.
 def main():
-    show_time()
+    # show_time()
     initialize_parser()
 
 
